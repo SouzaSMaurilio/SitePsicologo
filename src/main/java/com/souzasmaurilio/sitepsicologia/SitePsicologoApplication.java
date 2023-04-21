@@ -8,6 +8,7 @@ public class SitePsicologoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SitePsicologoApplication.class, args);
+	
 	}
 
 }

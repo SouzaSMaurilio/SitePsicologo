@@ -3,9 +3,14 @@ package com.souzasmaurilio.sitepsicologia.dominio;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Usuario")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private String id;
 	private String nome;
 	private String email;
@@ -15,6 +20,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario(String id, String nome, String email) {
+		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -46,7 +52,10 @@ public class Usuario implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int primeiro = 31;
+		int resultado = 1;
+		resultado = primeiro * resultado + ((id == null) ? 0 : id.hashCode());
+		return resultado;
 	}
 
 	@Override
@@ -58,7 +67,12 @@ public class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(id, other.id);
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 	
 }
