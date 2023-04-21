@@ -35,9 +35,10 @@ public class intanciacao implements CommandLineRunner {
 		admRepositorio.deleteAll();
 
 		Administrador bruno = new Administrador(null, "Bruno Bina", "Bruno@outlook.com", "Bina", "@1234568");
-		
+		Administrador larissa = new Administrador(null, "Larissa Pissul", "LarySuul@outlook.com", "LariSul", "@235844668");
+
 	
-		admRepositorio.saveAll(Arrays.asList(bruno));
+		admRepositorio.saveAll(Arrays.asList(bruno, larissa));
 	}
 	
 }
