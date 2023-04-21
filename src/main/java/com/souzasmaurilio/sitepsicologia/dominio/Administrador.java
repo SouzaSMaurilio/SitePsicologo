@@ -6,26 +6,31 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "usuario")
-public class Usuario implements Serializable {
+@Document(collection = "adm")
+public class Administrador implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private String id;
 	private String nome;
 	private String email;
+	private String loguin;
+	private String senha;
 	
-	public Usuario() {
+	public Administrador() {
 		
 	}
 
-	public Usuario(String id, String nome, String email) {
-		super();
+	public Administrador(String id, String nome, String email, String loguin, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.loguin = loguin;
+		this.senha = senha;
 	}
 
+
+	
 	public String getId() {
 		return id;
 	}
@@ -49,13 +54,28 @@ public class Usuario implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+
+	public String getLoguin() {
+		return loguin;
+	}
+
+	public void setLoguin(String loguin) {
+		this.loguin = loguin;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		senha = senha;
+	}
 
 	@Override
 	public int hashCode() {
-		final int primeiro = 31;
-		int resultado = 1;
-		resultado = primeiro * resultado + ((id == null) ? 0 : id.hashCode());
-		return resultado;
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -66,13 +86,8 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		Administrador other = (Administrador) obj;
+		return Objects.equals(id, other.id);
 	}
 	
 }
