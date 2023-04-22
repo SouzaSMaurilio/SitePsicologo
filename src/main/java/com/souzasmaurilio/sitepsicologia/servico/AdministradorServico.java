@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.souzasmaurilio.sitepsicologia.dominio.Administrador;
-import com.souzasmaurilio.sitepsicologia.dominio.Usuario;
+import com.souzasmaurilio.sitepsicologia.dominio.Administrador;
 import com.souzasmaurilio.sitepsicologia.dto.AdministradorDTO;
 import com.souzasmaurilio.sitepsicologia.repository.AdministradorRepositorio;
 import com.souzasmaurilio.sitepsicologia.servico.exception.ObjetoNaoEncontradoException;
@@ -35,6 +35,17 @@ public class AdministradorServico {
 	public void delete(String id) {
 		findById(id);
 		repo.deleteById(id);
+	}
+	
+	public Administrador update(Administrador obj) {
+		Administrador novoObj = findById(obj.getId());
+		updateDate(novoObj, obj);
+		return repo.save(novoObj);
+	}
+	
+	private void updateDate(Administrador novoObj, Administrador obj) {
+		novoObj.setNome(obj.getNome());
+		novoObj.setEmail(obj.getEmail());
 	}
 	
 	public Administrador fromDTO(AdministradorDTO objDTO) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.souzasmaurilio.sitepsicologia.dominio.Usuario;
@@ -36,6 +37,17 @@ public class UsuarioServico {
 		repo.deleteById(id);
 	}
 	
+	public Usuario update(Usuario obj) {
+		Usuario novoObj = findById(obj.getId());
+		updateDate(novoObj, obj);
+		return repo.save(novoObj);
+	}
+	
+	private void updateDate(Usuario novoObj, Usuario obj) {
+		novoObj.setNome(obj.getNome());
+		novoObj.setEmail(obj.getEmail());
+	}
+
 	public Usuario fromDTO(UsuarioDTO objDTO) {
 		return new Usuario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null);	
 	}
