@@ -26,9 +26,9 @@ public class intanciacao implements CommandLineRunner {
 		usuarioRepositorio.deleteAll();
 		
 
-		Usuario maria = new Usuario(null, "Maria Brown", "maria@gmail.com");
-		Usuario alex = new Usuario(null, "Alex Green", "alex@gmail.com");
-		Usuario bob = new Usuario(null, "Bob Grey", "bob@gmail.com");
+		Usuario maria = new Usuario(null, "Maria Brown", "maria@gmail.com", null, null);
+		Usuario alex = new Usuario(null, "Alex Green", "alex@gmail.com", null, null);
+		Usuario bob = new Usuario(null, "Bob Grey", "bob@gmail.com", null, null);
 	
 		usuarioRepositorio.saveAll(Arrays.asList(maria, alex, bob));
 		

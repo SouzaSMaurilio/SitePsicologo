@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.souzasmaurilio.sitepsicologia.dominio.Usuario;
+import com.souzasmaurilio.sitepsicologia.dto.UsuarioDTO;
 import com.souzasmaurilio.sitepsicologia.repository.UsuarioRepositorio;
 import com.souzasmaurilio.sitepsicologia.servico.exception.ObjetoNaoEncontradoException;
 
@@ -25,4 +26,18 @@ public class UsuarioServico {
 		return obj.orElseThrow(() -> new ObjetoNaoEncontradoException("Objeto não encontrado"));
 	
 	}
+	
+	public Usuario insert(Usuario obj) {
+		return repo.insert(obj);
+	}
+	
+	public void delete(String id) {
+		findById(id);
+		repo.deleteById(id);
+	}
+	
+	public Usuario fromDTO(UsuarioDTO objDTO) {
+		return new Usuario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null);	
+	}
+	
 }
