@@ -39,11 +39,11 @@ public class AdministradorServico {
 	
 	public Administrador update(Administrador obj) {
 		Administrador novoObj = findById(obj.getId());
-		updateDate(novoObj, obj);
+		updateData(novoObj, obj);
 		return repo.save(novoObj);
 	}
 	
-	private void updateDate(Administrador novoObj, Administrador obj) {
+	private void updateData(Administrador novoObj, Administrador obj) {
 		novoObj.setNome(obj.getNome());
 		novoObj.setEmail(obj.getEmail());
 	}

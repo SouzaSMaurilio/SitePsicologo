@@ -39,11 +39,11 @@ public class UsuarioServico {
 	
 	public Usuario update(Usuario obj) {
 		Usuario novoObj = findById(obj.getId());
-		updateDate(novoObj, obj);
+		updateData(novoObj, obj);
 		return repo.save(novoObj);
 	}
 	
-	private void updateDate(Usuario novoObj, Usuario obj) {
+	private void updateData(Usuario novoObj, Usuario obj) {
 		novoObj.setNome(obj.getNome());
 		novoObj.setEmail(obj.getEmail());
 	}
