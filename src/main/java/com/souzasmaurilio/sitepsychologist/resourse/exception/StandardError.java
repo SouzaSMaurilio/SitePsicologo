@@ -1,8 +1,8 @@
-package com.souzasmaurilio.sitepsicologia.recursos.exception;
+package com.souzasmaurilio.sitepsychologist.resourse.exception;
 
 import java.io.Serializable;
 
-public class ErroPadrao implements Serializable {
+public class StandardError implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long horaDoErro;
@@ -11,11 +11,11 @@ public class ErroPadrao implements Serializable {
 	private String mensagem;
 	private String caminho;
 	
-	public ErroPadrao() {
+	public StandardError() {
 		
 	}
 
-	public ErroPadrao(Long horaDoErro, Integer starus, String erro, String mensagem, String caminho) {
+	public StandardError(Long horaDoErro, Integer starus, String erro, String mensagem, String caminho) {
 		this.horaDoErro = horaDoErro;
 		this.starus = starus;
 		this.erro = erro;

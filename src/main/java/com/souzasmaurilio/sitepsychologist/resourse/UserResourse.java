@@ -1,4 +1,4 @@
-package com.souzasmaurilio.sitepsicologia.recursos;
+package com.souzasmaurilio.sitepsychologist.resourse;
 
 import java.net.URI;
 import java.util.List;
@@ -17,33 +17,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.souzasmaurilio.sitepsicologia.dominio.Usuario;
-import com.souzasmaurilio.sitepsicologia.dto.UsuarioDTO;
-import com.souzasmaurilio.sitepsicologia.servico.UsuarioServico;
+import com.souzasmaurilio.sitepsychologist.dominio.User;
+import com.souzasmaurilio.sitepsychologist.dto.UserDTO;
+import com.souzasmaurilio.sitepsychologist.service.UserService;
 
 @RestController
-@RequestMapping(value="/usuarios")
-public class UsuarioRecurso {
+@RequestMapping(value="/users")
+public class UserResourse {
 
 	@Autowired
-	private UsuarioServico servico;
+	private UserService servico;
 	
 	@GetMapping
- 	public ResponseEntity<List<UsuarioDTO>> findAll() {
-		List<Usuario> lista = servico.findAll();
-		List<UsuarioDTO> listaDTO = lista.stream().map(usuario -> new UsuarioDTO(usuario)).collect(Collectors.toList());
+ 	public ResponseEntity<List<UserDTO>> findAll() {
+		List<User> lista = servico.findAll();
+		List<UserDTO> listaDTO = lista.stream().map(User -> new UserDTO(User)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listaDTO);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
- 	public ResponseEntity<UsuarioDTO> findById(@PathVariable String id) {
-		Usuario obj = servico.findById(id);
-		return ResponseEntity.ok().body(new UsuarioDTO(obj));
+ 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
+		User obj = servico.findById(id);
+		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
 	
 	@PostMapping
- 	public ResponseEntity<Void> insert(@RequestBody UsuarioDTO objDTO) {
-		Usuario obj = servico.fromDTO(objDTO);
+ 	public ResponseEntity<Void> insert(@RequestBody UserDTO objDTO) {
+		User obj = servico.fromDTO(objDTO);
 		obj = servico.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -57,8 +57,8 @@ public class UsuarioRecurso {
 	}
 	
 	@PutMapping(value="/{id}")
- 	public ResponseEntity<Void> update(@RequestBody UsuarioDTO objDTO, @PathVariable String id) {
-		Usuario obj = servico.fromDTO(objDTO);
+ 	public ResponseEntity<Void> update(@RequestBody UserDTO objDTO, @PathVariable String id) {
+		User obj = servico.fromDTO(objDTO);
 		obj.setId(id);
 		obj = servico.update(obj);
 		return ResponseEntity.noContent().build();

@@ -1,4 +1,4 @@
-package com.souzasmaurilio.sitepsicologia.dominio;
+package com.souzasmaurilio.sitepsychologist.dominio;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,26 +7,26 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "adm")
-public class Administrador implements Serializable {
+public class Administrator implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private String id;
-	private String nome;
+	private String name;
 	private String email;
-	private String loguin;
-	private String senha;
+	private String login;
+	private String password;
 	
-	public Administrador() {
+	public Administrator() {
 		
 	}
 
-	public Administrador(String id, String nome, String email, String loguin, String senha) {
+	public Administrator(String id, String name, String email, String login, String password) {
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 		this.email = email;
-		this.loguin = loguin;
-		this.senha = senha;
+		this.login = login;
+		this.password = password;
 	}
 
 
@@ -39,12 +39,12 @@ public class Administrador implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String nome) {
+		this.name = nome;
 	}
 
 	public String getEmail() {
@@ -55,22 +55,20 @@ public class Administrador implements Serializable {
 		this.email = email;
 	}
 	
-	
-
-	public String getLoguin() {
-		return loguin;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setLoguin(String loguin) {
-		this.loguin = loguin;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
@@ -86,7 +84,7 @@ public class Administrador implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Administrador other = (Administrador) obj;
+		Administrator other = (Administrator) obj;
 		return Objects.equals(id, other.id);
 	}
 	
