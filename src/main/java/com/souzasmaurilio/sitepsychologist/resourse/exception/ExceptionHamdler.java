@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.souzasmaurilio.sitepsychologist.service.exception.ObjectNotFoundException;
 
 @ControllerAdvice
-public class ManipuladorDeExcecoes {
+public class ExceptionHamdler {
 	
 	@ExceptionHandler(ObjectNotFoundException .class)
 	public ResponseEntity<StandardError> objetoNaoEncontrado(ObjectNotFoundException e, HttpServletRequest request){

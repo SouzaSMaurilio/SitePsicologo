@@ -17,34 +17,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.souzasmaurilio.sitepsychologist.dominio.User;
+import com.souzasmaurilio.sitepsychologist.domain.User;
 import com.souzasmaurilio.sitepsychologist.dto.UserDTO;
 import com.souzasmaurilio.sitepsychologist.service.UserService;
 
 @RestController
-@RequestMapping(value="/users")
+@RequestMapping(value="/patients")
 public class UserResourse {
 
 	@Autowired
-	private UserService servico;
+	private UserService service;
 	
 	@GetMapping
  	public ResponseEntity<List<UserDTO>> findAll() {
-		List<User> lista = servico.findAll();
-		List<UserDTO> listaDTO = lista.stream().map(User -> new UserDTO(User)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listaDTO);
+		List<User> list = service.findAll();
+		List<UserDTO> listDTO = list.stream().map(User -> new UserDTO(User)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
  	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
-		User obj = servico.findById(id);
+		User obj = service.findById(id);
 		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
 	
 	@PostMapping
  	public ResponseEntity<Void> insert(@RequestBody UserDTO objDTO) {
-		User obj = servico.fromDTO(objDTO);
-		obj = servico.insert(obj);
+		User obj = service.fromDTO(objDTO);
+		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
@@ -52,15 +52,15 @@ public class UserResourse {
 	
 	@DeleteMapping(value="/{id}")
  	public ResponseEntity<Void> delete(@PathVariable String id) {
-		servico.delete(id);
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PutMapping(value="/{id}")
  	public ResponseEntity<Void> update(@RequestBody UserDTO objDTO, @PathVariable String id) {
-		User obj = servico.fromDTO(objDTO);
+		User obj = service.fromDTO(objDTO);
 		obj.setId(id);
-		obj = servico.update(obj);
+		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 	

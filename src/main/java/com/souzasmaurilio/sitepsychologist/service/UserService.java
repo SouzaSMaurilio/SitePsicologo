@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.souzasmaurilio.sitepsychologist.dominio.User;
+import com.souzasmaurilio.sitepsychologist.domain.User;
 import com.souzasmaurilio.sitepsychologist.dto.UserDTO;
 import com.souzasmaurilio.sitepsychologist.repository.UserRepository;
 import com.souzasmaurilio.sitepsychologist.service.exception.ObjectNotFoundException;

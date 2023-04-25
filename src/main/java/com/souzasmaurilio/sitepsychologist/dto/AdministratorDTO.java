@@ -1,8 +1,9 @@
 package com.souzasmaurilio.sitepsychologist.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
-import com.souzasmaurilio.sitepsychologist.dominio.Administrator;
+import com.souzasmaurilio.sitepsychologist.domain.Administrator;
 
 public class AdministratorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -10,6 +11,7 @@ public class AdministratorDTO implements Serializable {
 	private String id;
 	private String name;
 	private String email;
+	private List<UserDTO> patients;
 	
 	public AdministratorDTO() {
 		
@@ -17,8 +19,9 @@ public class AdministratorDTO implements Serializable {
 	
 	public AdministratorDTO(Administrator obj) {
 		id = obj.getId();
-		name = obj.getName();
+		name = obj.getAdmName();
 		email = obj.getEmail();
+		patients = obj.getPatients();
 	}
 
 	public String getId() {
@@ -44,4 +47,13 @@ public class AdministratorDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public List<UserDTO> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<UserDTO> patients) {
+		this.patients = patients;
+	}
+	
 }

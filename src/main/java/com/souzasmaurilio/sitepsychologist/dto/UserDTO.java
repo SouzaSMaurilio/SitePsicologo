@@ -2,7 +2,8 @@ package com.souzasmaurilio.sitepsychologist.dto;
 
 import java.io.Serializable;
 
-import com.souzasmaurilio.sitepsychologist.dominio.User;
+import com.souzasmaurilio.sitepsychologist.domain.User;
+
 
 public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -10,6 +11,8 @@ public class UserDTO implements Serializable{
 	private String id;
 	private String name;
 	private String email;
+	private PatientScheduleDTO patienteSchedule;
+
 	
 	public UserDTO() {
 		
@@ -19,6 +22,7 @@ public class UserDTO implements Serializable{
 		id = obj.getId();
 		name = obj.getName();
 		email = obj.getEmail();
+		patienteSchedule = obj.getPatientSchedule();
 	}
 
 	public String getId() {
@@ -44,4 +48,13 @@ public class UserDTO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public PatientScheduleDTO getPatienteSchedule() {
+		return patienteSchedule;
+	}
+
+	public void setPatienteSchedule(PatientScheduleDTO patienteSchedule) {
+		this.patienteSchedule = patienteSchedule;
+	}	
+
 }

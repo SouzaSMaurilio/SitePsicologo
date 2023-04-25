@@ -8,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import com.souzasmaurilio.sitepsychologist.dominio.Administrator;
-import com.souzasmaurilio.sitepsychologist.dominio.Schedule;
-import com.souzasmaurilio.sitepsychologist.dominio.User;
-import com.souzasmaurilio.sitepsychologist.dto.PatientDTO;
+import com.souzasmaurilio.sitepsychologist.domain.Administrator;
+import com.souzasmaurilio.sitepsychologist.domain.Schedule;
+import com.souzasmaurilio.sitepsychologist.domain.User;
 import com.souzasmaurilio.sitepsychologist.dto.PatientScheduleDTO;
+import com.souzasmaurilio.sitepsychologist.dto.UserDTO;
 import com.souzasmaurilio.sitepsychologist.repository.AdministratorRepository;
 import com.souzasmaurilio.sitepsychologist.repository.ScheduleRepository;
 import com.souzasmaurilio.sitepsychologist.repository.UserRepository;
 
 @Configuration
-public class instantiation implements CommandLineRunner {
+public class Instantiation implements CommandLineRunner {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -41,9 +41,9 @@ public class instantiation implements CommandLineRunner {
 		sdfData.setTimeZone(TimeZone.getTimeZone("GMT"));
 		sdfHora.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-		Schedule data1 = new Schedule(null, sdfData.parse("25/05/2023"), sdfHora.parse("14:30"), null);
-		Schedule data2 = new Schedule(null, sdfData.parse("25/05/2023"), sdfHora.parse("16:00"), null);
-		Schedule data3 = new Schedule(null, sdfData.parse("25/05/2023"), sdfHora.parse("11:00"), null);
+		Schedule data1 = new Schedule(null, sdfData.parse("25/05/2023"), sdfHora.parse("14:30"));
+		Schedule data2 = new Schedule(null, sdfData.parse("25/05/2023"), sdfHora.parse("16:00"));
+		Schedule data3 = new Schedule(null, sdfData.parse("25/05/2023"), sdfHora.parse("11:00"));
 
 		scheduleRepository.saveAll(Arrays.asList(data1, data2, data3));
 
@@ -52,17 +52,16 @@ public class instantiation implements CommandLineRunner {
 		User alex = new User(null, "Alex Green", "alex@gmail.com", "BoboVence", "Sariba", new PatientScheduleDTO(data3));
 
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
-
-		Administrator bruno = new Administrator(null, "Bruno Bina", "Bruno@outlook.com", "Bina", "@1234568");
-		Administrator larissa = new Administrator(null, "Larissa Pissul", "LarySuul@outlook.com", "LariSul", "@235844668");
-
-		admRepository.saveAll(Arrays.asList(bruno, larissa));
-
-		data1.setPatient(new PatientDTO(maria));
-		data2.setPatient(new PatientDTO(bob));
-		data3.setPatient(new PatientDTO(alex));
-
-		scheduleRepository.saveAll(Arrays.asList(data1, data2, data3));
+		
+		UserDTO patient1 = new UserDTO(maria);
+		UserDTO patient2 = new UserDTO(bob);
+		UserDTO patient3 = new UserDTO(alex);
+		
+		Administrator bruno = new Administrator(null, "Bruno Bina", "Bruno@outlook.com", "Bina", "@1234568", null);
+		bruno.setPatients(Arrays.asList(patient1, patient2, patient3));
+		
+		admRepository.saveAll(Arrays.asList(bruno));
+		
 	}
 
 }

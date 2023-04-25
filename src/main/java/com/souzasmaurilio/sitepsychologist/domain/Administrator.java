@@ -1,10 +1,13 @@
-package com.souzasmaurilio.sitepsychologist.dominio;
+package com.souzasmaurilio.sitepsychologist.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.souzasmaurilio.sitepsychologist.dto.UserDTO;
 
 @Document(collection = "adm")
 public class Administrator implements Serializable {
@@ -12,21 +15,23 @@ public class Administrator implements Serializable {
 	
 	@Id
 	private String id;
-	private String name;
+	private String admName;
 	private String email;
 	private String login;
 	private String password;
+	private List<UserDTO> patients;
 	
 	public Administrator() {
 		
 	}
 
-	public Administrator(String id, String name, String email, String login, String password) {
+	public Administrator(String id, String admName, String email, String login, String password, List<UserDTO> patients) {
 		this.id = id;
-		this.name = name;
+		this.admName = admName;
 		this.email = email;
 		this.login = login;
 		this.password = password;
+		this.patients = patients;
 	}
 
 
@@ -39,12 +44,12 @@ public class Administrator implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getAdmName() {
+		return admName;
 	}
 
-	public void setName(String nome) {
-		this.name = nome;
+	public void setAdmName(String nome) {
+		this.admName = nome;
 	}
 
 	public String getEmail() {
@@ -69,6 +74,16 @@ public class Administrator implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+
+	public List<UserDTO> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<UserDTO> patients) {
+		this.patients = patients;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.souzasmaurilio.sitepsychologist.dominio;
+package com.souzasmaurilio.sitepsychologist.domain;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.souzasmaurilio.sitepsychologist.dto.PatientScheduleDTO;
 
-@Document(collection = "User")
+@Document(collection = "patient")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

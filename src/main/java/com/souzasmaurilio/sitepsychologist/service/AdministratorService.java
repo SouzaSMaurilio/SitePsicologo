@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.souzasmaurilio.sitepsychologist.dominio.Administrator;
+import com.souzasmaurilio.sitepsychologist.domain.Administrator;
 import com.souzasmaurilio.sitepsychologist.dto.AdministratorDTO;
 import com.souzasmaurilio.sitepsychologist.repository.AdministratorRepository;
 import com.souzasmaurilio.sitepsychologist.service.exception.ObjectNotFoundException;
@@ -43,11 +43,11 @@ public class AdministratorService {
 	}
 	
 	private void updateData(Administrator novoObj, Administrator obj) {
-		novoObj.setName(obj.getName());
+		novoObj.setAdmName(obj.getAdmName());
 		novoObj.setEmail(obj.getEmail());
 	}
 	
 	public Administrator fromDTO(AdministratorDTO objDTO) {
-		return new Administrator(objDTO.getId(), objDTO.getName(), objDTO.getEmail(), null, null);	
+		return new Administrator(objDTO.getId(), objDTO.getName(), objDTO.getEmail(), null, null, null);	
 	}
 }

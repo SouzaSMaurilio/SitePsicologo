@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.souzasmaurilio.sitepsychologist.dominio.Administrator;
+import com.souzasmaurilio.sitepsychologist.domain.Administrator;
 import com.souzasmaurilio.sitepsychologist.dto.AdministratorDTO;
 import com.souzasmaurilio.sitepsychologist.service.AdministratorService;
 
 @RestController
-@RequestMapping(value="/adm")
+@RequestMapping(value="/adms")
 public class AdministratorResourse {
 
 	@Autowired

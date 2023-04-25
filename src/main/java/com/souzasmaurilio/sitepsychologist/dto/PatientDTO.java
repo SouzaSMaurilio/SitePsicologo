@@ -2,7 +2,7 @@ package com.souzasmaurilio.sitepsychologist.dto;
 
 import java.io.Serializable;
 
-import com.souzasmaurilio.sitepsychologist.dominio.User;
+import com.souzasmaurilio.sitepsychologist.domain.User;
 
 
 public class PatientDTO implements Serializable {
@@ -10,13 +10,15 @@ public class PatientDTO implements Serializable {
 
 	private String id;
 	private String name;
+	private PatientScheduleDTO patientSchedule;
 	
 	public PatientDTO() {
 	}
 
-	public PatientDTO(User Patient) {
+	public PatientDTO(User Patient, PatientScheduleDTO patientSchedule) {
 		id = Patient.getId();
 		name = Patient.getName();
+		this.patientSchedule = patientSchedule;
 	}
 
 	public String getId() {
@@ -34,5 +36,15 @@ public class PatientDTO implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public PatientScheduleDTO getPatientSchedule() {
+		return patientSchedule;
+	}
+
+	public void setPatientSchedule(PatientScheduleDTO patientSchedule) {
+		this.patientSchedule = patientSchedule;
+	}
+	
+	
 
 }

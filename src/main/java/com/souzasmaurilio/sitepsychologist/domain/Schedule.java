@@ -1,4 +1,4 @@
-package com.souzasmaurilio.sitepsychologist.dominio;
+package com.souzasmaurilio.sitepsychologist.domain;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.souzasmaurilio.sitepsychologist.dto.PatientDTO;
 
 @Document(collection = "schedule")
@@ -15,18 +16,18 @@ public class Schedule implements Serializable{
 
 	@Id
 	private String id;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date date;
+	@JsonFormat(pattern="HH:mm")
 	private Date time;
-	private PatientDTO patient;
 	
 	public Schedule() {
 	}
 
-	public Schedule(String id, Date date, Date time, PatientDTO patient) {
+	public Schedule(String id, Date date, Date time) {
 		this.id = id;
 		this.date = date;
 		this.time = time;
-		this.patient = patient;
 	}
 
 	public String getId() {
@@ -49,15 +50,6 @@ public class Schedule implements Serializable{
 		return time;
 	}
 
-
-	public PatientDTO getPatient() {
-		return patient;
-	}
-
-	public void setPatient(PatientDTO patient) {
-		this.patient = patient;
-	}
-	
 	public void setHorario(Date time) {
 		this.time = time;
 	}
