@@ -1,7 +1,6 @@
 package com.souzasmaurilio.sitepsychologist;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.TimeZone;
@@ -13,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.souzasmaurilio.sitepsychologist.domain.Administrator;
+import com.souzasmaurilio.sitepsychologist.domain.Calendar;
 import com.souzasmaurilio.sitepsychologist.domain.Schedule;
 import com.souzasmaurilio.sitepsychologist.domain.User;
 import com.souzasmaurilio.sitepsychologist.dto.PatientScheduleDTO;
@@ -42,7 +42,8 @@ public class SitePsychologistApplication {
         return args -> {
 
             List<User> patients = userService.findAll();
-
+            Calendar calendar = new Calendar();
+            
             Scanner scanner = new Scanner(System.in);
 
             SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -64,16 +65,30 @@ public class SitePsychologistApplication {
 
             User user = new User(null, name, email, login, password, null);
             userService.insert(user);
-
+            
             System.out.println("Digite a data da consulta: (dd/mm/aaaa)");
             String date = scanner.nextLine();
 
             System.out.println("Digite o horario da consulta: (HH:mm)");
             String time = scanner.nextLine();
-
+            
             Schedule schedule = new Schedule(null, sdfDate.parse(date), sdfTime.parse(time));
             scheduleRepository.save(schedule);
-
+            
+            if (calendar.isDateValid(date) == true) {
+            	System.out.println("Data valida");
+            }
+            else {
+            	System.out.println("Data invalida: Por favor escolha uma nova data");
+            }
+          
+            if (calendar.isTimeValid(time) == true) {
+            	System.out.println("Horario valido");
+            }
+            else {
+            	System.out.println("Horario invalido: Por favor escolha outro horario");
+            }
+            
             user.setPatientSchedule(new PatientScheduleDTO(schedule));
 
             List<Administrator> adms = admRepository.findAll();
@@ -82,6 +97,8 @@ public class SitePsychologistApplication {
                 adm.getPatients().add(userDTO);
                 admRepository.save(adm);
             }
+            
+          
 
             scanner.close();
         };
