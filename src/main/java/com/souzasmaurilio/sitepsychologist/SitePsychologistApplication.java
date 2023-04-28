@@ -2,6 +2,7 @@ package com.souzasmaurilio.sitepsychologist;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.TimeZone;
 
@@ -19,6 +20,7 @@ import com.souzasmaurilio.sitepsychologist.dto.PatientScheduleDTO;
 import com.souzasmaurilio.sitepsychologist.dto.UserDTO;
 import com.souzasmaurilio.sitepsychologist.repository.AdministratorRepository;
 import com.souzasmaurilio.sitepsychologist.repository.ScheduleRepository;
+import com.souzasmaurilio.sitepsychologist.repository.UserRepository;
 import com.souzasmaurilio.sitepsychologist.service.UserService;
 
 @SpringBootApplication
@@ -26,6 +28,9 @@ public class SitePsychologistApplication {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ScheduleRepository scheduleRepository;
@@ -41,8 +46,11 @@ public class SitePsychologistApplication {
     public CommandLineRunner run() {
         return args -> {
 
+        	
             List<User> patients = userService.findAll();
             Calendar calendar = new Calendar();
+            
+            
             
             Scanner scanner = new Scanner(System.in);
 
@@ -98,6 +106,26 @@ public class SitePsychologistApplication {
                 admRepository.save(adm);
             }
             
+            
+            System.out.println("Digite o usuário ou email");
+            String loginReal = scanner.nextLine();
+                        
+            System.out.println("Digite a sua senha");
+            String senhaReal = scanner.nextLine();
+                        
+            Optional<User> verification = userRepository.findByLogin(loginReal);
+                        
+            if (verification.isPresent()) {
+                User obj = verification.get();
+                if (obj.getPassword().equals(senhaReal)) {
+                    System.out.println("Login bem-sucedido");
+                } else {
+                    System.out.println("Senha incorreta");
+                }
+            } else {
+                System.out.println("Email inválido");
+            }
+
           
 
             scanner.close();

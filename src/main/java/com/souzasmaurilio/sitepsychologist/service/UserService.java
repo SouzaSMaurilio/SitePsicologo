@@ -24,8 +24,12 @@ public class UserService {
 	public User findById(String id) {
 		Optional<User> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
-	
 	}
+	
+	public User findByEmail(String login) {
+	    return repo.findByLogin(login).orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado"));
+	}
+
 	
 	public User insert(User obj) {
 		return repo.insert(obj);
