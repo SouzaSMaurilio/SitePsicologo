@@ -1,21 +1,27 @@
 package com.souzasmaurilio.sitepsychologist.config;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.PageRequest;
 
 import com.souzasmaurilio.sitepsychologist.domain.Administrator;
+import com.souzasmaurilio.sitepsychologist.domain.NewCalendar;
 import com.souzasmaurilio.sitepsychologist.domain.Schedule;
 import com.souzasmaurilio.sitepsychologist.domain.User;
 import com.souzasmaurilio.sitepsychologist.dto.PatientScheduleDTO;
 import com.souzasmaurilio.sitepsychologist.dto.UserDTO;
 import com.souzasmaurilio.sitepsychologist.repository.AdministratorRepository;
+import com.souzasmaurilio.sitepsychologist.repository.NewCalendarRepository;
 import com.souzasmaurilio.sitepsychologist.repository.ScheduleRepository;
 import com.souzasmaurilio.sitepsychologist.repository.UserRepository;
+import com.souzasmaurilio.sitepsychologist.utils.CalendarUtils;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
@@ -28,6 +34,9 @@ public class Instantiation implements CommandLineRunner {
 
 	@Autowired
 	private ScheduleRepository scheduleRepository;
+	
+	@Autowired
+	private NewCalendarRepository newCalendarRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -35,6 +44,8 @@ public class Instantiation implements CommandLineRunner {
 		userRepository.deleteAll();
 		admRepository.deleteAll();
 		scheduleRepository.deleteAll();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
 		SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
@@ -62,6 +73,8 @@ public class Instantiation implements CommandLineRunner {
 		
 		admRepository.saveAll(Arrays.asList(bruno));
 		
+		System.out.println(newCalendarRepository.findByDate(LocalDate.parse("2023/05/15", formatter), PageRequest.of(0, 1)).getContent().get(0));
+	
+		CalendarUtils.generateNext90days();
 	}
-
 }
