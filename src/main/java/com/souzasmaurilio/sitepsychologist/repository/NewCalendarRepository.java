@@ -15,4 +15,7 @@ public interface NewCalendarRepository extends MongoRepository<NewCalendar, Stri
 
 	@Query("{'date': ?0}")
 	Page<NewCalendar> findByDate(LocalDate date, Pageable pages);
+	
+	@Query("{'_id': ?0, 'officeHours.?1': true}")
+	public void update(String id, String time);
 }

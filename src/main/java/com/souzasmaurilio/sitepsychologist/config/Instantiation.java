@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.souzasmaurilio.sitepsychologist.domain.Administrator;
-import com.souzasmaurilio.sitepsychologist.domain.NewCalendar;
 import com.souzasmaurilio.sitepsychologist.domain.Schedule;
 import com.souzasmaurilio.sitepsychologist.domain.User;
 import com.souzasmaurilio.sitepsychologist.dto.PatientScheduleDTO;
@@ -73,8 +73,9 @@ public class Instantiation implements CommandLineRunner {
 		
 		admRepository.saveAll(Arrays.asList(bruno));
 		
-		System.out.println(newCalendarRepository.findByDate(LocalDate.parse("2023/05/15", formatter), PageRequest.of(0, 1)).getContent().get(0));
-	
 		CalendarUtils.generateNext90days();
+
+		newCalendarRepository.update("646bd8080372e11750db4df7", "11:00");
+
 	}
 }
