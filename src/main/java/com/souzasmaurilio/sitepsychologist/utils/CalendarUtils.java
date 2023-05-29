@@ -53,16 +53,22 @@ public class CalendarUtils {
         }
     }
     
-    public void update(String id, String time) {
-        Optional<NewCalendar> optionalCalendar = repo.findById(id);
-        if (optionalCalendar.isPresent()) {
-            NewCalendar calendar = optionalCalendar.get();
-            Map<String, Boolean> officeHours = calendar.getOfficeHours();
-            if (officeHours.containsKey(time)) {
-                officeHours.put(time, false);
-                repo.save(calendar);
-            }
-        }
+    public NewCalendar update(String calendarId, String hour) {
+    	Optional<NewCalendar> calendar = repo.findById(calendarId);
+    	 if (calendar != null) {
+    	        calendar.get().getOfficeHours().put(hour, false);
+    	        return repo.save(calendar.get());
+    	    } else {
+    	        return null;
+    	    }
+   
+//    	System.out.println(calendar.getOfficeHours().get(Hour));
+//		if(calendar.getOfficeHours().containsKey(Hour)) {
+//			calendar.getOfficeHours().put(Hour, false);
+//		}
+//		System.out.println(calendar.getOfficeHours().get(Hour));
+//		
+//		return calendar;
     }
 
 }

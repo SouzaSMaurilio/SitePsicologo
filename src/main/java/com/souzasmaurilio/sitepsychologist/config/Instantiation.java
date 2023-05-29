@@ -1,18 +1,17 @@
 package com.souzasmaurilio.sitepsychologist.config;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.List;
 import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import com.souzasmaurilio.sitepsychologist.domain.Administrator;
+import com.souzasmaurilio.sitepsychologist.domain.NewCalendar;
 import com.souzasmaurilio.sitepsychologist.domain.Schedule;
 import com.souzasmaurilio.sitepsychologist.domain.User;
 import com.souzasmaurilio.sitepsychologist.dto.PatientScheduleDTO;
@@ -75,7 +74,19 @@ public class Instantiation implements CommandLineRunner {
 		
 		CalendarUtils.generateNext90days();
 
-		newCalendarRepository.update("646bd8080372e11750db4df7", "11:00");
+		List<NewCalendar> list = newCalendarRepository.findAll();
+	
+		for(NewCalendar a: list) {
+			System.out.println(a.getOfficeHours().get("15:00"));
+			if(a.getOfficeHours().containsKey("15:00")) {
+				a.getOfficeHours().put("15:00", false);
+			}
+			System.out.println(a.getOfficeHours().get("15:00"));
+			
+			newCalendarRepository.save(a);	
+		}
+		
+//		newCalendarRepository.update("646bd8080372e11750db4df7", "11:00");
 
 	}
 }

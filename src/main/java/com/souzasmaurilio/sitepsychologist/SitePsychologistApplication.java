@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import com.souzasmaurilio.sitepsychologist.domain.NewCalendar;
 import com.souzasmaurilio.sitepsychologist.repository.AdministratorRepository;
 import com.souzasmaurilio.sitepsychologist.repository.ScheduleRepository;
 import com.souzasmaurilio.sitepsychologist.repository.UserRepository;
@@ -113,6 +114,20 @@ public class SitePsychologistApplication {
 //            } else {
 //                System.out.println("Email inválido");
 //            }
+// 
+//    //corrigir para um if simples:
+//    
+//	for(NewCalendar a: list) {
+//		System.out.println(a.getOfficeHours().get("10:00"));
+//		if(a.getOfficeHours().containsKey("10:00")) {
+//			a.getOfficeHours().put("10:00", false);
+//		}
+//		System.out.println(a.getOfficeHours().get("10:00"));
+//		
+//		newCalendarRepository.save(a);
+//	}
+//	
+//	
 //
 //          
 //
